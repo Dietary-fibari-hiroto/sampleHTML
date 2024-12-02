@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Audio Visualizer</title>
+    <style>
+      body {
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #1a001a;
+      }
+
+      .container {
+        display: flex;
+        align-items: flex-end;
+        gap: 2px;
+        overflow: hidden;
+      }
+
+      .bar {
+        width: 15px;
+        background: linear-gradient(to top, #ff0080, #8000ff);
+        transition: height 0.1s;
+      }
+
+      .myLight {
+        z-index: 3;
+        position: absolute;
+        height: 10px;
+        width: 10px;
+        bottom: 300px;
+        color: white;
+        background-color: white;
+        box-shadow: 0px 0px 200px 100px rgb(255, 255, 255, 10),
+          0px 0px 150px 80px rgb(255, 255, 255, 10),
+          0px 0px 100px 50px rgb(255, 255, 255, 10),
+          0px 0px 60px 30px rgb(255, 255, 255, 10),
+          0px 0px 30px 20px rgb(255, 255, 255, 10),
+          0px 0px 10px 10px rgb(255, 255, 255, 10),
+          0px 0px 5px 5px rgb(255, 255, 255, 10);
+
+        border-radius: 50%;
+      }
+      .Light {
+        z-index: 4;
+        position: absolute;
+        height: 10px;
+        width: 100vw;
+        bottom: 300px;
+        color: white;
+        background-color: white;
+        box-shadow: 0px 0px 10px 1px rgb(255, 255, 255, 10),
+          0px 0px 30px 10px rgb(255, 255, 255, 10),
+          0px 0px 50px 20px rgb(255, 255, 255, 10);
+
+        border-radius: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="myLight"></div>
+    <div class="Light"></div>
+    <div class="container" id="visualizer"></div>
+
+    <script>
+      const container = document.getElementById("visualizer");
+      const barCount = 60;
+      const maxBarHeight = 300;
+
+      // バーを生成
+      for (let i = 0; i < barCount; i++) {
+        const bar = document.createElement("div");
+        bar.classList.add("bar");
+        container.appendChild(bar);
+      }
+
+      // バーの高さをランダムに変化させてアニメーションを実現
+      function animateBars() {
+        const bars = document.querySelectorAll(".bar");
+        bars.forEach((bar, index) => {
+          const height =
+            Math.abs(Math.sin(Date.now() / 500 + index)) * maxBarHeight;
+          bar.style.height = `${height}px`;
+        });
+        requestAnimationFrame(animateBars);
+      }
+
+      animateBars();
+    </script>
+  </body>
+</html>

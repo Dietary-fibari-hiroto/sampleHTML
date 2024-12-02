@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Wavw-test</title>
+  </head>
+
+  <body>
+    <!--
+    <div class="wave"></div>
+<style>
+  body {
+    background-color: #1c1b29; /* 背景色 */
+  }
+  .wave {
+    width: 100%;
+    height: 400px;
+    background: linear-gradient(135deg, #ff0080 0%, #6a0dad 100%);
+    clip-path: ellipse(50% 100% at 50% 0%);
+    opacity: 0.8;
+  }
+</style>
+
+    -->
+
+    <!--
+    <svg class="wave" viewBox="0 0 1440 320">
+  <path fill="#ff0080" fill-opacity="0.8" d="M0,160L40,165.3C80,171,160,181,240,197.3C320,213,400,235,480,218.7C560,203,640,149,720,122.7C800,96,880,96,960,106.7C1040,117,1120,139,1200,149.3C1280,160,1360,160,1400,160L1440,160L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"></path>
+</svg>
+<style>
+  body {
+    background-color: #1c1b29;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .wave {
+    width: 100%;
+    height: auto;
+  }
+</style>
+
+    -->
+    <canvas id="waveCanvas"></canvas>
+    <style>
+      body,
+      html {
+        margin: 0;
+        overflow: hidden;
+      }
+      #waveCanvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    </style>
+    <script>
+      const canvas = document.getElementById("waveCanvas");
+      const ctx = canvas.getContext("2d");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      let waveOffset = 0;
+
+      function drawWave() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#ff0080";
+        ctx.beginPath();
+        ctx.moveTo(0, canvas.height / 2);
+        for (let x = 0; x <= canvas.width; x++) {
+          const y = canvas.height / 2 + Math.sin((x + waveOffset) * 0.05) * 50;
+          ctx.lineTo(x, y);
+        }
+        ctx.lineTo(canvas.width, canvas.height);
+        ctx.lineTo(0, canvas.height);
+        ctx.closePath();
+        ctx.fill();
+        waveOffset += 2;
+        requestAnimationFrame(drawWave);
+      }
+
+      drawWave();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,8 @@
+<style>
+    list-style: none; //点消し
+    text-decoration: none; //下線消し
+    display: flex; //liの親要素であるulの「display: flex;」にすることで、liタグの要素を横並びに
+    padding-top: 15px; //上方向に余白
+    boxsizing: border-box; //padding-topを設定しても、バーの高さが変わらない
+    
+</style>
